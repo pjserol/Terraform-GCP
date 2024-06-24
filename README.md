@@ -2,7 +2,7 @@
 
 ## Install Terraform
 
-`https://developer.hashicorp.com/terraform/install?product_intent=terraform`
+<https://developer.hashicorp.com/terraform/install?product_intent=terraform>
 
 ```sh
 terraform version
@@ -13,6 +13,7 @@ terraform version
 Main documentation <https://registry.terraform.io/>
 
 Local file <https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file>
+Random provider <https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string>
 
 ## VSCode extension
 
