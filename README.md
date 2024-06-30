@@ -100,3 +100,53 @@ terraform init
 
 terraform apply
 ```
+
+## Compute images list
+
+```sh
+gcloud compute images list
+```
+
+## SSH VM Instance via gcloud
+
+```sh
+gcloud compute ssh vm-instance
+```
+
+## SSH VM Instance via ssh client
+
+```sh
+gcloud compute instances list --filter="name=('vm-instance')"
+# External IP: 34.67.63.127
+
+ssh-keygen -t rsa -b 4096 -C  "pj.serol.au@gmail.com" -f ./my-ssh-key
+# After generating the key, add username (username:ssh-rsa-etc)
+
+chmod 600 ./my-ssh-key
+
+gcloud compute project-info add-metadata --metadata-from-file=ssh-keys=./my-ssh-key.pub
+
+# Is it optional?
+gcloud compute instances add-metadata vm-instance --metadata-from-file ssh-keys=./my-ssh-key.pub
+
+# If getting message Host key has changed, run:
+ssh-keygen -R 34.67.63.127
+
+ssh -i ./my-ssh-key pjserol@34.67.63.127
+
+# Then you can run
+uptime # system uptime and load
+df -h # check disk usage
+free -m # memory usage
+ip a # view ip address
+gcloud auth list # check service account
+
+# With icmp protocol enable for ip address of the machine
+# https://whatismyipaddress.com/
+ping 34.70.81.172
+
+# Helper Command
+gcloud compute os-login ssh-keys list
+
+gcloud compute project-info describe --format="value(commonInstanceMetadata[items][ssh-keys])"
+```
