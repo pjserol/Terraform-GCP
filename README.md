@@ -189,3 +189,39 @@ INSERT INTO employees (name) VALUES ('John Doe');
 
 SELECT * FROM employees;
 ```
+
+## Connection to memorystore for Redis
+
+```sh
+# Install Redis
+brew install redis
+
+gcloud redis instances describe tf-redis --region=us-central1
+
+# Get HOST
+gcloud redis instances describe tf-redis --region=us-central1 --format="get(host)"
+```
+
+```sh
+# Create VM to connect via a VM with SSH tunnel
+gcloud compute instances create my-vm --zone=us-central1-a --machine-type=f1-micro --subnet=default
+
+gcloud compute ssh my-vm --zone=us-central1-a --ssh-flag="-L 6379:10.186.134.75:6379" --tunnel-through-iap
+
+# In a different shell, start the redis-cli
+redis-cli -h 127.0.0.1 -p 6379
+
+# When you're done, delete the vm
+gcloud compute instances delete my-vm --zone=us-central1-a
+```
+
+```sh
+# Redis command
+SET mykey "Hello"
+
+GET mykey
+
+HSET myhash field1 "value1"
+
+HGETALL myhash
+```
