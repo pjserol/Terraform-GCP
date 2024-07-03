@@ -101,6 +101,16 @@ terraform init
 terraform apply
 ```
 
+## Check API Services enabled & enable it
+
+```sh
+gcloud services list --enabled
+
+gcloud services enable run.googleapis.com
+
+gcloud services disable storage-api.googleapis.com --force
+```
+
 ## Compute images list
 
 ```sh
