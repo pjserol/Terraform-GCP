@@ -150,3 +150,42 @@ gcloud compute os-login ssh-keys list
 
 gcloud compute project-info describe --format="value(commonInstanceMetadata[items][ssh-keys])"
 ```
+
+## Connection to Cloud SQL via MySQL or gcloud
+
+```sh
+# Install mysql client
+brew install mysql-client
+```
+
+```sh
+# Via MySQL with public IP Address
+mysql -u user-mysql -ppwd123 -h 146.148.51.111
+```
+
+```sh
+# Via gcloud
+gcloud sql connect instance-mysql --user=user-mysql --quiet
+# enter password pwd123
+```
+
+```sh
+# MySQL Commands
+mysql > show databases;
+
+# Optional if done with terraform
+# CREATE DATABASE example_db;
+
+USE database-mysql;
+
+SHOW TABLES;
+
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
+);
+
+INSERT INTO employees (name) VALUES ('John Doe');
+
+SELECT * FROM employees;
+```
